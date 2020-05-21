@@ -37,18 +37,39 @@ function client_columns($columns){
   return $columns;
 }
 
-add_action( 'manage_client_posts_custom_column' , 'fill_client_columns', 10, 2 );
-public function fill_client_columns( $column, $post_id ) {
-  // Fill in the columns with meta box info associated with each post
+function client_custom_column_values( $column, $post_id ) {
   switch ( $column ) {
-    case 'client_id' :
+    // in this example, a Product has custom fields called 'product_number' and 'product_name'
+    case 'client_id':
       echo $post_id;
       break;
-    case 'role' :
+    case 'role':
       echo get_post_meta($post_id, 'role', true );
-  		break;
-    case 'grade' :
-      echo get_post_meta($post_id, 'grade', true );
+      break;
+    case 'grade':
+      $grade_var = get_post_meta($post_id, 'grade', true );
+      if($grade_var){
+        echo $grade_var;
+      }else{
+        echo '<div class="dashicons dashicons-minus"></div>';
+      }
       break;
   }
 }
+add_action( 'manage_client_posts_custom_column' , 'client_custom_column_values', 10, 2 );
+
+// add_action( 'manage_client_posts_custom_column' , 'fill_client_columns', 10, 2 );
+// public function fill_client_columns( $column, $post_id ) {
+//   // Fill in the columns with meta box info associated with each post
+//   switch ( $column ) {
+//     case 'client_id' :
+//       echo $post_id;
+//       break;
+//     case 'role' :
+//       echo get_post_meta($post_id, 'role', true );
+//   		break;
+//     case 'grade' :
+//       echo get_post_meta($post_id, 'grade', true );
+//       break;
+//   }
+// }
