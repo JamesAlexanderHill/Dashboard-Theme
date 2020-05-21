@@ -154,38 +154,39 @@ function generate_lesson_list($params = array()) {
 	), $params));
 
   //get the list of lessons from database for the current user
-  $date_now = date('Y-m-d H:i:s');
-  $offset_date = strtotime($offset . " days");
-  // $start = ;
-  // $end = ;
-  //
-  // // Query events.
-  // $posts = get_posts(array(
-  //   'posts_per_page' => -1,
-  //   'post_type'      => 'lesson',
-  //   'meta_query'     => array(
-  //     array(
-  //       'key'         => 'timestamp',
-  //       'compare'     => 'BETWEEN',
-  //       'value'       => array( $start, $end ),
-  //       'type'        => 'DATETIME'
-  //     )
-  //   ),
-  //   'order'          => 'ASC',
-  //   'orderby'        => 'meta_value',
-  //   'meta_key'       => 'timestamp',
-  //   'meta_type'      => 'DATETIME'
-  // ));
-  //
-  // if( $posts ) {
-  //     foreach( $posts as $post ) {
-  //         // Do something.
-  //     }
-  // }
+  $today = strtotime("today");
+  $start = strtotime($offset . " days", $today);
+  $end = strtotime("+23 hours 59 minutes 59 seconds", $start);
+
+  // Query events.
+  $posts = get_posts(array(
+    'posts_per_page' => -1,
+    'post_type'      => 'lesson',
+    'meta_query'     => array(
+      array(
+        'key'         => 'timestamp',
+        'compare'     => 'BETWEEN',
+        'value'       => array( $start, $end ),
+        'type'        => 'DATETIME'
+      )
+    ),
+    'order'          => 'ASC',
+    'orderby'        => 'meta_value',
+    'meta_key'       => 'timestamp',
+    'meta_type'      => 'DATETIME'
+  ));
+
+
 
   //generate the list
   $lessonList = "<ul>";
-  $lessonList .= "<li>Coach ID: ".$coach_id." term: ".$term." (".date('Y-m-d H:i:s',$offset_date).")</li>";
+  if( $posts ) {
+      foreach( $posts as $post ) {
+        $post_id = $post->ID;
+        $lessonList .= "<li>Coach ID: ".get_post_meta($post_id, 'coach', true )." term: ".$term."</li>";
+      }
+  }
+
   $lessonList .= "</ul>";
 
 	return $lessonList;
