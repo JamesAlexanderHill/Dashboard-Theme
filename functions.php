@@ -23,13 +23,13 @@ add_action( 'init', 'role_changes' );
 add_filter('manage_client_posts_columns' , 'client_columns');
 function client_columns($columns){
 	$date_val = $columns['date'];
-  $name_val = $columns['title'];
+  $title_val = $columns['title'];
 	unset($columns['date']);
   unset($columns['title']);
 
   //reset values
   $columns['client_id'] = __( 'ID' );
-	$columns['title'] = $name_val;
+	$columns['title'] = $title_val;
 	$columns['role'] = __( 'Role' );
   $columns['grade'] = __( 'Grade' );
 	$columns['date'] = $date_val;
@@ -58,18 +58,30 @@ function client_custom_column_values( $column, $post_id ) {
 }
 add_action( 'manage_client_posts_custom_column' , 'client_custom_column_values', 10, 2 );
 
-// add_action( 'manage_client_posts_custom_column' , 'fill_client_columns', 10, 2 );
-// public function fill_client_columns( $column, $post_id ) {
-//   // Fill in the columns with meta box info associated with each post
-//   switch ( $column ) {
-//     case 'client_id' :
-//       echo $post_id;
-//       break;
-//     case 'role' :
-//       echo get_post_meta($post_id, 'role', true );
-//   		break;
-//     case 'grade' :
-//       echo get_post_meta($post_id, 'grade', true );
-//       break;
-//   }
-// }
+//custom columns for LOCATIONS
+add_filter('manage_location_posts_columns' , 'location_columns');
+function location_columns($columns){
+  $title_val = $columns['title'];
+  unset($columns['title']);
+	$date_val = $columns['date'];
+	unset($columns['date']);
+
+  //reset values
+	$columns['title'] = $title_val;
+	$columns['centre'] = __( 'Centre' );
+  $columns['type'] = __( 'Type' );
+
+  return $columns;
+}
+
+function location_custom_column_values( $column, $post_id ) {
+  switch ( $column ) {
+    case 'centre':
+      echo get_post_meta($post_id, 'location_centre', true );
+      break;
+    case 'type':
+      echo get_post_meta($post_id, 'location_type', true );
+      break;
+  }
+}
+add_action( 'manage_location_posts_custom_column' , 'location_custom_column_values', 10, 2 );
