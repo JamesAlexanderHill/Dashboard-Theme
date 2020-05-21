@@ -23,15 +23,16 @@ add_action( 'init', 'role_changes' );
 add_filter('manage_client_posts_columns' , array($this,'client_columns'));
 public function client_columns($columns){
 	$date_val = $columns['date'];
+  $name_val = $columns['title'];
 	unset($columns['date']);
   unset($columns['title']);
 
   //reset values
-  $columns['client_id'] = __( 'ID' );
-	$columns['name'] = __( 'Name' );
-	$columns['role'] = __( 'Role' );
-  $columns['grade'] = __( 'Grade' );
-	$columns['date'] = $date_val;
+  // $columns['client_id'] = __( 'ID' );
+	// $columns['name'] = $name_val;
+	// $columns['role'] = __( 'Role' );
+  // $columns['grade'] = __( 'Grade' );
+	// $columns['date'] = $date_val;
 
   return $columns;
 }
@@ -43,9 +44,6 @@ public function client_columns($columns){
 //     case 'client_id' :
 //       echo $post_id;
 //       break;
-//     case 'name' :
-//       echo get_the_title( $post_id );
-// 			break;
 //     case 'role' :
 //       echo get_post_meta($post_id, 'role', true );
 //   		break;
