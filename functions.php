@@ -83,7 +83,7 @@ add_filter('manage_lesson_posts_columns' , 'lesson_columns');
 function lesson_columns($columns){
   unset($columns['title']);
 	unset($columns['date']);
-  unset($columns['cetegories']);
+  unset($columns['categories']);
 	unset($columns['tags']);
 
   //reset values
@@ -102,7 +102,7 @@ function lesson_custom_column_values( $column, $post_id ) {
       $type = get_post_meta($post_id, 'type', true );
       $day = get_post_meta($post_id, 'day', true );
       $time = get_post_meta($post_id, 'time', true );
-      echo $type . " | " . $day . " - " . $time;
+      echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'>" . $type . " | " . $day . " - " . $time . "</a>";
       break;
     case 'coach':
       echo get_post_meta($post_id, 'coach', true );
