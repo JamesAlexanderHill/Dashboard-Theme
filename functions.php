@@ -101,8 +101,8 @@ function lesson_custom_column_values( $column, $post_id ) {
     case 'lesson':
       $date_time = get_field('timestamp', $post_id);
       $unix = strtotime($date_time);
-      $day = date_i18n("D", $unix)
-      $time = date_i18n("h:i:s A", $unix)
+      $day = date_i18n("D", $unix);
+      $time = date_i18n("h:i:s A", $unix);
 
       $type = get_post_meta($post_id, 'type', true );
       echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'>" . $type . " | " . $day . " - " . $time . "</a>";
