@@ -10,26 +10,11 @@
  */
 
 //Edit Roles for users
- function wps_add_role() {
-   add_role( 'coach', 'Coach', array('read', 'edit_posts'));
- }
- add_action( 'init', 'wps_add_role' );
- function wps_remove_role() {
-   //check if role exist before removing it
-   if( get_role('subscriber') ){
-     remove_role( 'subscriber' );
-   }
-   //check if role exist before removing it
-   if( get_role('contributor') ){
-     remove_role( 'contributor' );
-   }
-   //check if role exist before removing it
-   if( get_role('editor') ){
-     remove_role( 'editor' );
-   }
-   //check if role exist before removing it
-   if( get_role('author') ){
-     remove_role( 'author' );
-   }
- }
- add_action( 'init', 'wps_remove_role' );
+function role_changes() {
+  add_role( 'coach', 'Coach', array('read', 'edit_posts'));
+  remove_role('subscriber');
+  remove_role('editor');
+  remove_role('author');
+  remove_role('contributor');
+}
+add_action( 'init', 'wps_add_role' );
