@@ -83,9 +83,11 @@ add_filter('manage_lesson_posts_columns' , 'lesson_columns');
 function lesson_columns($columns){
   unset($columns['title']);
 	unset($columns['date']);
+  unset($columns['cetegories']);
+	unset($columns['tags']);
 
   //reset values
-	$columns['title'] = __( 'Title' );
+	$columns['lesson'] = __( 'Lesson' );
 	$columns['coach'] = __( 'Coach' );
   $columns['location'] = __( 'Location' );
   $columns['hours'] = __( 'Hours' );
@@ -96,7 +98,7 @@ function lesson_columns($columns){
 
 function lesson_custom_column_values( $column, $post_id ) {
   switch ( $column ) {
-    case 'title':
+    case 'lesson':
       $type = get_post_meta($post_id, 'type', true );
       $day = get_post_meta($post_id, 'day', true );
       $time = get_post_meta($post_id, 'time', true );
