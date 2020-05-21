@@ -102,11 +102,11 @@ function lesson_custom_column_values( $column, $post_id ) {
       $date_time = get_field('timestamp', $post_id);
       $unix = strtotime($date_time);
       $day = date_i18n("D", $unix);
-      $time = date_i18n("h:i:s A", $unix);
+      $time = date_i18n("g:i A", $unix);
 
       $type = get_post_meta($post_id, 'type', true );
 
-      echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'>" . $type . " | (" . $date_time . ") " . $day . " - " . $time . "</a>";
+      echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'>" . $type . " | " . $day . " - " . $time . "</a>";
       break;
     case 'coach':
       $coach_id = get_post_meta($post_id, 'coach', true );
