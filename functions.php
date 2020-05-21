@@ -16,7 +16,6 @@ function role_changes() {
   remove_role('editor');
   remove_role('author');
   remove_role('contributor');
-  date_default_timezone_set('Australia/NSW');
 }
 add_action( 'init', 'role_changes' );
 
@@ -155,8 +154,8 @@ function generate_lesson_list($params = array()) {
 	), $params));
 
   //get the list of lessons from database for the current user
-  $today = strtotime("today");
-  $start = strtotime($offset . " days", $today);
+  $now = strtotime("now");
+  $start = strtotime($offset . " days", strtotime("today"));
   $end = strtotime("+23 hours 59 minutes 59 seconds", $start);
 
   // Query events.
@@ -181,7 +180,7 @@ function generate_lesson_list($params = array()) {
 
   //generate the list
   if( $posts ) {
-    $lessonList = date_i18n("d-m-Y g:i A", $start)." -> ".date_i18n("d-m-Y g:i A", $end)."<br><table><tr><th>Time</th><th>Location</th><th>Length</th><th>Attendance</th></tr>";
+    $lessonList = date_i18n("d-m-Y g:i A", $start)." -> ".date_i18n("d-m-Y g:i A", $now)." -> ".date_i18n("d-m-Y g:i A", $end)."<br><table><tr><th>Time</th><th>Location</th><th>Length</th><th>Attendance</th></tr>";
 
     foreach( $posts as $post ) {
       $post_id = $post->ID;
