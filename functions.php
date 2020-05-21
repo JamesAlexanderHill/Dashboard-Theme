@@ -134,4 +134,8 @@ function redirect_users(){
     wp_redirect(site_url('/login'));
     exit();
   }
+  if(is_page('login') && is_user_logged_in()) {
+    wp_redirect(site_url());
+    exit();
+  }
 }
