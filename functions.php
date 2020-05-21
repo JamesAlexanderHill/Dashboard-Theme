@@ -19,33 +19,41 @@ function role_changes() {
 }
 add_action( 'init', 'role_changes' );
 
-// //show columns in custom post types
-// add_filter( 'manage_edit-trips_columns', 'my_edit_trips_columns' ) ;
-// function my_edit_trips_columns( $columns ) {
-//
-// 	// // store value temporarily.
-// 	// $date_val = $columns['date'];
-//   //
-// 	// // Unset original index.
-// 	// unset( $columns['date'] );
-//   //
-// 	// $columns['title'] = __( 'Trip name' );
-// 	// $columns['region'] = __( 'Region' );
-// 	// $columns['start_date'] = __( 'Start date' );
-// 	// $columns['date'] = $date_val;
-//   $columns['start_date'] = __( 'Start date' );
-//
-// 	return $columns;
-// }
-function client_columns($columns) {
-    // unset( $columns['title']  );
-    // unset( $columns['author'] );
-    // unset( $columns['date']   );
-    //
-    // $columns['product_number'] = 'Product Number';
-    // $columns['custom_handler'] = 'Nice name';
-    $columns['role'] = __( 'Role' );
-    $columns['grade'] = __( 'Grade' );
-    return $columns;
+//custom columns for CLIENT
+add_filter('manage_client_posts_columns' , array($this,'client_columns'));
+public function client_columns($columns){
+	$date_val = $columns['date'];
+	unset($columns['date']);
+  unset($columns['title']);
+
+  //reset values
+  $columns['client_id'] = __( 'ID' );
+	$columns['name'] = __( 'Name' );
+	$columns['role'] = __( 'Role' );
+  $columns['grade'] = __( 'Grade' );
+	$columns['date'] = $date_val;
+
+  return $columns;
 }
-add_filter( 'client_posts_columns', 'client_columns' );
+
+add_action( 'manage_client_posts_custom_column' , array($this,'fill_client_columns'), 10, 2 );
+public function fill_client_columns( $column, $post_id ) {
+  // Fill in the columns with meta box info associated with each post
+  switch ( $column ) {
+    case 'client_id' :
+      echo $post_id;
+      break;
+    case 'name' :
+      echo get_the_title( $post_id );
+			break;
+    case 'role' :
+      echo get_post_meta($post_id, 'role', true );
+  		break;
+    case 'grade' :
+      echo get_post_meta($post_id, 'grade', true );
+      break;
+    case 'date' :
+      echo get_the_date('',$post_id);
+			break;
+  }
+}
