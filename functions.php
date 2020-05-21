@@ -155,7 +155,8 @@ function generate_lesson_list($params = array()) {
 
   //get the list of lessons from database for the current user
   $now = strtotime(date_i18n('Y-m-d H:i:s'));
-  $start = strtotime($offset . " days", strtotime("today"));
+  $today = strtotime("today",$now);
+  $start = strtotime($offset . " days", $today);
   $end = strtotime("+23 hours 59 minutes 59 seconds", $start);
 
   // Query events.
