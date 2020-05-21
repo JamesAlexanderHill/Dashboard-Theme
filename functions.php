@@ -150,25 +150,24 @@ function generate_lesson_list($params = array()) {
 	// default parameters
 	extract(shortcode_atts(array(
 		'coach_id' => get_current_user_id(),
-    'day' => '-1'
     'term' => '-1'
 	), $params));
 
   //get the list of lessons from database for the current user
-  $args=array(
-    'post_type' => 'lesson',
-    'dayofweek' => $day,
-    'order' => 'ASC',
-    'orderby' => 'meta_value_num',
-    'meta_key' => 'time',
-    'meta_query' => array(
-      array(
-        'key' => 'times',
-        'value' => 0,
-        'compare' => '>=',
-      )
-    )
-);
+//   $args=array(
+//     'post_type' => 'lesson',
+//     'dayofweek' => $day,
+//     'order' => 'ASC',
+//     'orderby' => 'meta_value_num',
+//     'meta_key' => 'time',
+//     'meta_query' => array(
+//       array(
+//         'key' => 'times',
+//         'value' => 0,
+//         'compare' => '>=',
+//       )
+//     )
+// );
 
   //generate the list
   $lessonList = "<ul>";
