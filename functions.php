@@ -139,3 +139,23 @@ function redirect_users(){
     exit();
   }
 }
+
+//shortcodes
+function generate_lesson_list($params = array()) {
+
+	// default parameters
+	extract(shortcode_atts(array(
+		'coach_id' => '',
+    'term' => ""
+	), $params));
+
+  //get the list of lessons from database for the current user
+
+  //generate the list
+  $lessonList = "<ul>";
+  $lessonList += "<li>Coach ID: ".$coach_id." term: ".$term."</li>";
+  $lessonList += "</ul>";
+
+	return $lessonList;
+}
+add_shortcode('get_lessons', 'generate_lesson_list');
