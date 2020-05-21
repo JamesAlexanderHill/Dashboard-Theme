@@ -111,7 +111,10 @@ function lesson_custom_column_values( $column, $post_id ) {
       echo $first_name . " " . $last_name;
       break;
     case 'location':
-      echo get_the_title(get_post_meta($post_id, 'location', true ));
+      $court_id = get_post_meta($post_id, 'location', true );
+      $court = get_the_title($court_id);
+      $centre = get_post_meta($court_id, 'location_centre', true )
+      echo $court . " | " . $centre;
       break;
     case 'hours':
       echo get_post_meta($post_id, 'length', true );
