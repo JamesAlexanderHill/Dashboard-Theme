@@ -192,7 +192,7 @@ function generate_lesson_list($params = array()) {
       $court = get_the_title($court_id);
       $centre = get_post_meta($court_id, 'location_centre', true );
 
-      $lessonList .= "<tr><td>".$time."</td><td>".$court ." - ". $centre."</td><td>".get_post_meta($post_id, 'length', true );."</td><td><button>Attendance</button></td></tr>"
+      $lessonList .= "<tr><td>".$time."</td><td>".$court ." - ". $centre."</td><td>".get_post_meta($post_id, 'length', true );."</td><td><button>Attendance</button></td></tr>";
     }
 
     $lessonList .= "</table>";
