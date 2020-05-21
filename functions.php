@@ -17,4 +17,4 @@ function role_changes() {
   remove_role('author');
   remove_role('contributor');
 }
-add_action( 'init', 'wps_add_role' );
+add_action( 'init', 'role_changes' );
