@@ -181,7 +181,7 @@ function generate_lesson_list($params = array()) {
 
   //generate the list
   if( $posts ) {
-    $lessonList = "<table><tr><th>Time</th><th>Location</th><th>Length</th><th>Attendance</th></tr>";
+    $lessonList = date_i18n("d-m-Y g:i A", $start)." -> ".date_i18n("d-m-Y g:i A", $end)."<br><table><tr><th>Time</th><th>Location</th><th>Length</th><th>Attendance</th></tr>";
 
     foreach( $posts as $post ) {
       $post_id = $post->ID;
