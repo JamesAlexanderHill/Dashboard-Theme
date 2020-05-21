@@ -111,13 +111,13 @@ function lesson_custom_column_values( $column, $post_id ) {
       echo $first_name . " " . $last_name;
       break;
     case 'location':
-      echo get_post_meta($post_id, 'location', true )->the_title;
+      echo get_the_title(get_post_meta($post_id, 'location', true ));
       break;
     case 'hours':
       echo get_post_meta($post_id, 'length', true );
       break;
     case 'term':
-      echo get_post_meta($post_id, 'term', true )->the_title;
+      echo get_the_title(get_post_meta($post_id, 'term', true ));
       break;
   }
 }
