@@ -20,8 +20,8 @@ function role_changes() {
 add_action( 'init', 'role_changes' );
 
 //custom columns for CLIENT
-add_filter('manage_client_posts_columns' , array($this,'client_columns'));
-public function client_columns($columns){
+add_filter('manage_client_posts_columns' , 'client_columns');
+function client_columns($columns){
 	$date_val = $columns['date'];
   $name_val = $columns['title'];
 	unset($columns['date']);
