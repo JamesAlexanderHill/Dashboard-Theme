@@ -37,21 +37,18 @@ function client_columns($columns){
   return $columns;
 }
 
-// add_action( 'manage_client_posts_custom_column' , array($this,'fill_client_columns'), 10, 2 );
-// public function fill_client_columns( $column, $post_id ) {
-//   // Fill in the columns with meta box info associated with each post
-//   switch ( $column ) {
-//     case 'client_id' :
-//       echo $post_id;
-//       break;
-//     case 'role' :
-//       echo get_post_meta($post_id, 'role', true );
-//   		break;
-//     case 'grade' :
-//       echo get_post_meta($post_id, 'grade', true );
-//       break;
-//     case 'date' :
-//       echo get_the_date('',$post_id);
-// 			break;
-//   }
-// }
+add_action( 'manage_client_posts_custom_column' , 'fill_client_columns', 10, 2 );
+public function fill_client_columns( $column, $post_id ) {
+  // Fill in the columns with meta box info associated with each post
+  switch ( $column ) {
+    case 'client_id' :
+      echo $post_id;
+      break;
+    case 'role' :
+      echo get_post_meta($post_id, 'role', true );
+  		break;
+    case 'grade' :
+      echo get_post_meta($post_id, 'grade', true );
+      break;
+  }
+}
