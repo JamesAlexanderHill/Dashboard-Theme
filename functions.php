@@ -145,16 +145,16 @@ function generate_lesson_list($params = array()) {
 
 	// default parameters
 	extract(shortcode_atts(array(
-		'coach_id' => '',
-    'term' => ""
+		'coach_id' => '-1',
+    'term' => '-1'
 	), $params));
 
   //get the list of lessons from database for the current user
 
   //generate the list
   $lessonList = "<ul>";
-  $lessonList += "<li>Coach ID: ".$coach_id." term: ".$term."</li>";
-  $lessonList += "</ul>";
+  // $lessonList += "<li>Coach ID: ".$coach_id." term: ".$term."</li>";
+  // $lessonList += "</ul>";
 
 	return $lessonList;
 }
