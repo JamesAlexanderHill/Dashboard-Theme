@@ -28,11 +28,11 @@ function client_columns($columns){
   unset($columns['title']);
 
   //reset values
-  // $columns['client_id'] = __( 'ID' );
-	// $columns['name'] = $name_val;
-	// $columns['role'] = __( 'Role' );
-  // $columns['grade'] = __( 'Grade' );
-	// $columns['date'] = $date_val;
+  $columns['client_id'] = __( 'ID' );
+	$columns['name'] = $name_val;
+	$columns['role'] = __( 'Role' );
+  $columns['grade'] = __( 'Grade' );
+	$columns['date'] = $date_val;
 
   return $columns;
 }
