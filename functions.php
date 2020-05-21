@@ -16,6 +16,7 @@ function role_changes() {
   remove_role('editor');
   remove_role('author');
   remove_role('contributor');
+  date_default_timezone_set('Australia/NSW');
 }
 add_action( 'init', 'role_changes' );
 
@@ -187,7 +188,7 @@ function generate_lesson_list($params = array()) {
       // $lessonList .= "<li>Coach ID: ".get_post_meta($post_id, 'coach', true )." term: ".$term."</li>";
       $date_time = get_field('timestamp', $post_id);
       $unix = strtotime($date_time);
-      $time = date_i18n("g:i A", $unix);
+      $time = date_i18n("d-m-Y g:i A", $unix);
       $court_id = get_post_meta($post_id, 'location', true );
       $court = get_the_title($court_id);
       $centre = get_post_meta($court_id, 'location_centre', true );
