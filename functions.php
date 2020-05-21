@@ -126,3 +126,12 @@ function lesson_custom_column_values( $column, $post_id ) {
   }
 }
 add_action( 'manage_lesson_posts_custom_column' , 'lesson_custom_column_values', 10, 2 );
+
+//redirect users to login page if they are not logged in
+add_action( 'template_redirect', 'redirect_users');
+function redirect_users(){
+  if(!is_page('login') && !is_user_logged_in()) {
+    wp_redirect(site_url('/login'));
+    exit();
+  }
+}
