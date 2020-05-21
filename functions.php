@@ -145,7 +145,7 @@ function generate_lesson_list($params = array()) {
 
 	// default parameters
 	extract(shortcode_atts(array(
-		'coach_id' => '-1',
+		'coach_id' => get_current_user_id(),
     'term' => '-1'
 	), $params));
 
