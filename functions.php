@@ -149,28 +149,43 @@ function generate_lesson_list($params = array()) {
 	// default parameters
 	extract(shortcode_atts(array(
 		'coach_id' => get_current_user_id(),
+    'offset' => '0',
     'term' => '-1'
 	), $params));
 
   //get the list of lessons from database for the current user
-//   $args=array(
-//     'post_type' => 'lesson',
-//     'dayofweek' => $day,
-//     'order' => 'ASC',
-//     'orderby' => 'meta_value_num',
-//     'meta_key' => 'time',
-//     'meta_query' => array(
-//       array(
-//         'key' => 'times',
-//         'value' => 0,
-//         'compare' => '>=',
-//       )
-//     )
-// );
+  $date_now = date('Y-m-d H:i:s');
+  $offset_date = strtotime($offset . " days");
+  // $start = ;
+  // $end = ;
+  //
+  // // Query events.
+  // $posts = get_posts(array(
+  //   'posts_per_page' => -1,
+  //   'post_type'      => 'lesson',
+  //   'meta_query'     => array(
+  //     array(
+  //       'key'         => 'timestamp',
+  //       'compare'     => 'BETWEEN',
+  //       'value'       => array( $start, $end ),
+  //       'type'        => 'DATETIME'
+  //     )
+  //   ),
+  //   'order'          => 'ASC',
+  //   'orderby'        => 'meta_value',
+  //   'meta_key'       => 'timestamp',
+  //   'meta_type'      => 'DATETIME'
+  // ));
+  //
+  // if( $posts ) {
+  //     foreach( $posts as $post ) {
+  //         // Do something.
+  //     }
+  // }
 
   //generate the list
   $lessonList = "<ul>";
-  $lessonList .= "<li>Coach ID: ".$coach_id." term: ".$term."</li>";
+  $lessonList .= "<li>Coach ID: ".$coach_id." term: ".$term." (".date('Y-m-d H:i:s',$offset_date).")</li>";
   $lessonList .= "</ul>";
 
 	return $lessonList;
