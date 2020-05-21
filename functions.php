@@ -187,14 +187,15 @@ function generate_lesson_list($params = array()) {
 
   //generate the list
   if( $posts ) {
-    $lessonList = date_i18n("d-m-Y g:i A", $start)." -> ".date_i18n("d-m-Y g:i A", $now)." -> ".date_i18n("d-m-Y g:i A", $end)."<br><table><tr><th>Time</th><th>Location</th><th>Length</th><th>Attendance</th></tr>";
+    $lessonList = date_i18n("d-m-Y g:i A", $start)." -> ".date_i18n("d-m-Y g:i A", $now)." -> ".date_i18n("d-m-Y g:i A", $end);
+    $lessonList = "<br><table><tr><th>Time</th><th>Location</th><th>Length</th><th>Attendance</th></tr>";
 
     foreach( $posts as $post ) {
       $post_id = $post->ID;
       // $lessonList .= "<li>Coach ID: ".get_post_meta($post_id, 'coach', true )." term: ".$term."</li>";
       $date_time = get_field('timestamp', $post_id);
       $unix = strtotime($date_time);
-      $time = date_i18n("d-m-Y g:i A", $unix);
+      $time = date_i18n("g:i A", $unix);
       $court_id = get_post_meta($post_id, 'location', true );
       $court = get_the_title($court_id);
       $centre = get_post_meta($court_id, 'location_centre', true );
