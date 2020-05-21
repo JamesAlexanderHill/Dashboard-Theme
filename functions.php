@@ -18,3 +18,34 @@ function role_changes() {
   remove_role('contributor');
 }
 add_action( 'init', 'role_changes' );
+
+// //show columns in custom post types
+// add_filter( 'manage_edit-trips_columns', 'my_edit_trips_columns' ) ;
+// function my_edit_trips_columns( $columns ) {
+//
+// 	// // store value temporarily.
+// 	// $date_val = $columns['date'];
+//   //
+// 	// // Unset original index.
+// 	// unset( $columns['date'] );
+//   //
+// 	// $columns['title'] = __( 'Trip name' );
+// 	// $columns['region'] = __( 'Region' );
+// 	// $columns['start_date'] = __( 'Start date' );
+// 	// $columns['date'] = $date_val;
+//   $columns['start_date'] = __( 'Start date' );
+//
+// 	return $columns;
+// }
+function client_columns($columns) {
+    // unset( $columns['title']  );
+    // unset( $columns['author'] );
+    // unset( $columns['date']   );
+    //
+    // $columns['product_number'] = 'Product Number';
+    // $columns['custom_handler'] = 'Nice name';
+    $columns['role'] = __( 'Role' );
+    $columns['grade'] = __( 'Grade' );
+    return $columns;
+}
+add_filter( 'client_posts_columns', 'client_columns' );
