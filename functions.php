@@ -102,7 +102,7 @@ function lesson_custom_column_values( $column, $post_id ) {
       $type = get_post_meta($post_id, 'type', true );
       $day = get_post_meta($post_id, 'day', true );
       $time = get_post_meta($post_id, 'time', true );
-      echo "<a href='/wp-admin/post.php?post='" . $post_id ." '&action=edit'>" . $type . " | " . $day . " - " . $time . "</a>";
+      echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'><bold>" . $type . " | " . $day . " - " . $time . "</bold></a>";
       break;
     case 'coach':
       echo get_post_meta($post_id, 'coach', true );
