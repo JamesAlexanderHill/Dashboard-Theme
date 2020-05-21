@@ -23,13 +23,9 @@ add_action( 'init', 'role_changes' );
 add_filter('manage_client_posts_columns' , 'client_columns');
 function client_columns($columns){
 	$date_val = $columns['date'];
-  $title_val = $columns['title'];
 	unset($columns['date']);
-  unset($columns['title']);
 
   //reset values
-  $columns['client_id'] = __( 'ID' );
-	$columns['title'] = $title_val;
 	$columns['role'] = __( 'Role' );
   $columns['grade'] = __( 'Grade' );
 	$columns['date'] = $date_val;
@@ -39,10 +35,6 @@ function client_columns($columns){
 
 function client_custom_column_values( $column, $post_id ) {
   switch ( $column ) {
-    // in this example, a Product has custom fields called 'product_number' and 'product_name'
-    case 'client_id':
-      echo $post_id;
-      break;
     case 'role':
       echo get_post_meta($post_id, 'role', true );
       break;
@@ -85,3 +77,43 @@ function location_custom_column_values( $column, $post_id ) {
   }
 }
 add_action( 'manage_location_posts_custom_column' , 'location_custom_column_values', 10, 2 );
+
+//custom columns for LESSONS
+add_filter('manage_lesson_posts_columns' , 'lesson_columns');
+function lesson_columns($columns){
+  unset($columns['title']);
+	unset($columns['date']);
+
+  //reset values
+	$columns['title'] = __( 'Title' );
+	$columns['coach'] = __( 'Coach' );
+  $columns['location'] = __( 'Location' );
+  $columns['hours'] = __( 'Hours' );
+  $columns['term'] = __( 'Term' );
+
+  return $columns;
+}
+
+function lesson_custom_column_values( $column, $post_id ) {
+  switch ( $column ) {
+    case 'title':
+      $type = get_post_meta($post_id, 'type', true );
+      $day = get_post_meta($post_id, 'day', true );
+      $time = get_post_meta($post_id, 'time', true );
+      echo $type . " | " . $day . " - " . $time;
+      break;
+    case 'coach':
+      echo get_post_meta($post_id, 'coach', true );
+      break;
+    case 'location':
+      echo get_post_meta($post_id, 'location', true );
+      break;
+    case 'hours':
+      echo get_post_meta($post_id, 'length', true );
+      break;
+    case 'term':
+      echo get_post_meta($post_id, 'term', true );
+      break;
+  }
+}
+add_action( 'manage_lesson_posts_custom_column' , 'lesson_custom_column_values', 10, 2 );
