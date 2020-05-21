@@ -166,7 +166,7 @@ function generate_lesson_list($params = array()) {
       array(
         'key'         => 'timestamp',
         'compare'     => 'BETWEEN',
-        'value'       => array( $start, $end ),
+        'value'       => array( date_i18n('Y-m-d H:i:s', $start), date_i18n('Y-m-d H:i:s', $end) ),
         'type'        => 'DATETIME'
       )
     ),
@@ -179,15 +179,16 @@ function generate_lesson_list($params = array()) {
 
 
   //generate the list
-  $lessonList = "<ul>";
   if( $posts ) {
-      foreach( $posts as $post ) {
-        $post_id = $post->ID;
-        $lessonList .= "<li>Coach ID: ".get_post_meta($post_id, 'coach', true )." term: ".$term."</li>";
-      }
-  }
+    $lessonList = "<ul>";
 
-  $lessonList .= "</ul>";
+    foreach( $posts as $post ) {
+      $post_id = $post->ID;
+      $lessonList .= "<li>Coach ID: ".get_post_meta($post_id, 'coach', true )." term: ".$term."</li>";
+    }
+
+    $lessonList .= "</ul>";
+  }
 
 	return $lessonList;
 }
