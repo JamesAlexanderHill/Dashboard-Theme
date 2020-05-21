@@ -169,6 +169,12 @@ function generate_lesson_list($params = array()) {
         'compare'     => 'BETWEEN',
         'value'       => array( date_i18n('Y-m-d H:i:s', $start), date_i18n('Y-m-d H:i:s', $end) ),
         'type'        => 'DATETIME'
+      ),
+      array(
+        'key'           => 'coach',
+        'compare'       => '==',
+        'value'         => $coach_id,
+        'type'          => 'NUMERIC',
       )
     ),
     'order'          => 'ASC',
