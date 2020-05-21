@@ -182,18 +182,18 @@ function generate_lesson_list($params = array()) {
   if( $posts ) {
     $lessonList = "<table><tr><th>Time</th><th>Location</th><th>Length</th><th>Attendance</th></tr>";
 
-    foreach( $posts as $post ) {
-      $post_id = $post->ID;
-      // $lessonList .= "<li>Coach ID: ".get_post_meta($post_id, 'coach', true )." term: ".$term."</li>";
-      $date_time = get_field('timestamp', $post_id);
-      $unix = strtotime($date_time);
-      $time = date_i18n("g:i A", $unix);
-      $court_id = get_post_meta($post_id, 'location', true );
-      $court = get_the_title($court_id);
-      $centre = get_post_meta($court_id, 'location_centre', true );
-
-      $lessonList .= "<tr><td>".$time."</td><td>".$court ." - ". $centre."</td><td>".get_post_meta($post_id, 'length', true );."</td><td><button>Attendance</button></td></tr>";
-    }
+    // foreach( $posts as $post ) {
+    //   $post_id = $post->ID;
+    //   // $lessonList .= "<li>Coach ID: ".get_post_meta($post_id, 'coach', true )." term: ".$term."</li>";
+    //   $date_time = get_field('timestamp', $post_id);
+    //   $unix = strtotime($date_time);
+    //   $time = date_i18n("g:i A", $unix);
+    //   $court_id = get_post_meta($post_id, 'location', true );
+    //   $court = get_the_title($court_id);
+    //   $centre = get_post_meta($court_id, 'location_centre', true );
+    //
+    //   $lessonList .= "<tr><td>".$time."</td><td>".$court ." - ". $centre."</td><td>".get_post_meta($post_id, 'length', true );."</td><td><button>Attendance</button></td></tr>";
+    // }
 
     $lessonList .= "</table>";
   }
