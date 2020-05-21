@@ -1,4 +1,5 @@
 <?php get_template_part( 'parts/header' ); ?>
+<!-- START index.php -->
 <main>
   <?php get_template_part( 'parts/sidebar' ); ?>
   <section id="content">
@@ -13,4 +14,5 @@
     ?>
   </section>
 </main>
+<!-- END index.php -->
 <?php get_template_part( 'parts/footer' );?>
