@@ -99,12 +99,14 @@ function lesson_columns($columns){
 function lesson_custom_column_values( $column, $post_id ) {
   switch ( $column ) {
     case 'lesson':
-      $date_time = get_field('timestamp', $post_id);
-      $unix = strtotime($date_time);
-      $day = date_i18n("D", $unix);
-      $time = date_i18n("h:i:s A", $unix);
-
+      // $date_time = get_field('timestamp', $post_id);
+      // $unix = strtotime($date_time);
+      // $day = date_i18n("D", $unix);
+      // $time = date_i18n("h:i:s A", $unix);
       $type = get_post_meta($post_id, 'type', true );
+      $day = get_post_meta($post_id, 'day', true );
+      // $time = get_post_meta($post_id, 'time', true );
+      $time = get_field( 'time', $post_id );
       echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'>" . $type . " | " . $day . " - " . $time . "</a>";
       break;
     case 'coach':
@@ -148,7 +150,7 @@ function generate_lesson_list($params = array()) {
 	// default parameters
 	extract(shortcode_atts(array(
 		'coach_id' => get_current_user_id(),
-    'day' =>
+    'day' => '-1'
     'term' => '-1'
 	), $params));
 
