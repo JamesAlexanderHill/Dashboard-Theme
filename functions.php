@@ -105,10 +105,8 @@ function lesson_custom_column_values( $column, $post_id ) {
       echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'><bold>" . $type . " | " . $day . " - " . $time . "</bold></a>";
       break;
     case 'coach':
-      $coach_id = get_post_meta($post_id, 'coach', true )
-      $first_name = get_user_meta( $coach_id, 'first_name', true );
-      $last_name = get_user_meta( $coach_id, 'last_name', true );
-      echo $first_name . " " . $last_name;
+      $coach = get_post_meta($post_id, 'coach', true )
+      echo $coach->first_name . " " . $coach->last_name;
       break;
     case 'location':
       echo get_post_meta($post_id, 'location', true );
