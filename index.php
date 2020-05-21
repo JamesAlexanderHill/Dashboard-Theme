@@ -1,6 +1,6 @@
-<?php get_template_part( 'parts/', 'header' ); ?>
+<?php get_template_part( 'parts/header' ); ?>
 <main>
-  <?php get_template_part( 'parts/', 'sidebar' ); ?>
+  <?php get_template_part( 'parts/sidebar' ); ?>
   <section id="content">
     <?php
     if ( have_posts() ) :
@@ -13,4 +13,4 @@
     ?>
   </section>
 </main>
-<?php get_template_part( 'parts/', 'footer' );?>
+<?php get_template_part( 'parts/footer' );?>
