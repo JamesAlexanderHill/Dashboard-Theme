@@ -113,7 +113,7 @@ function lesson_custom_column_values( $column, $post_id ) {
     case 'location':
       $court_id = get_post_meta($post_id, 'location', true );
       $court = get_the_title($court_id);
-      $centre = get_post_meta($court_id, 'location_centre', true )
+      $centre = get_post_meta($court_id, 'location_centre', true );
       echo $court . " | " . $centre;
       break;
     case 'hours':
