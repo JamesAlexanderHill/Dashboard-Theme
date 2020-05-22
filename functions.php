@@ -210,7 +210,6 @@ function generate_lesson_list($params = array()) {
 add_shortcode('get_lessons', 'generate_lesson_list');
 
 //dynamically fill Forms
-add_filter( 'gform_field_value_coach_ids', 'get_coach_list' );
 function get_coach_list($value){
   //get list of users
   $users = get_users();
@@ -221,3 +220,4 @@ function get_coach_list($value){
   $field->choices = $choices;
   return $field;
 }
+add_filter( 'gform_field_value_coach_ids', 'get_coach_list', 10, 3);
