@@ -216,7 +216,7 @@ function get_coach_list($value){
   $users = get_users();
   $choices = array ();
   foreach ( $users as $user ) {
-      $choices[] = array( 'text' => $user->display_name, 'value' => $user->ID );
+      $choices[] = array( 'text' => $user->display_name, 'value' => $user->id );
   }
   $field->choices = $choices;
   return $field;
