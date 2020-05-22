@@ -211,12 +211,12 @@ add_shortcode('get_lessons', 'generate_lesson_list');
 
 //dynamically fill Forms
 add_filter( 'gform_field_value_coach_ids', 'get_coach_list' );
-function get_coach_list(){
+function get_coach_list($value){
   //get list of users
   $users = get_users();
   $choices = array ();
   foreach ( $users as $user ) {
-      $choices[] = array( 'text' => $user->display_name, 'value' => $post->ID );
+      $choices[] = array( 'text' => $user->display_name, 'value' => $user->ID );
   }
   $field->choices = $choices;
   return $field;
