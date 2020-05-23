@@ -257,7 +257,6 @@ add_shortcode('get_lessons', 'generate_lesson_list');
 // }
 // add_action('transition_post_status', 'my_post_new');
 function create_lesson_batch( $ID, $post ) {
-    // A function to perform actions when a post is scheduled to be published.
-    ?><script>console.log("RUN");</script><?php
+  mail('jhill7177@gmail.com','lesson published','done lesson publish');
 }
-add_action('publish_post', 'create_lesson_batch', 10, 2 );
+add_action('publish_lesson', 'create_lesson_batch', 10, 2 );
