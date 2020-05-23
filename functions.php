@@ -257,11 +257,14 @@ add_shortcode('get_lessons', 'generate_lesson_list');
 // }
 // add_action('transition_post_status', 'my_post_new');
 function create_lesson_batch( $ID, $post ) {
-  $to = 'jhill7177@gmail.com';
-  $subject = 'create_lesson_batch';
-  $body = 'Success';
-  $headers = array('Content-Type: text/html; charset=UTF-8');
+  //check if it is a single lesson
+  if(get_post_meta($ID, 'is_lesson_batch', true )){
+    $to = 'jhill7177@gmail.com';
+    $subject = 'create_lesson_batch';
+    $body = 'Success';
+    $headers = array('Content-Type: text/html; charset=UTF-8');
 
-  wp_mail( $to, $subject, $body, $headers );
+    wp_mail( $to, $subject, $body, $headers );
+  }
 }
 add_action('publish_lesson', 'create_lesson_batch', 10, 2 );
