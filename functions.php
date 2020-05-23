@@ -130,6 +130,32 @@ function lesson_custom_column_values( $column, $post_id ) {
 }
 add_action( 'manage_lesson_posts_custom_column' , 'lesson_custom_column_values', 10, 2 );
 
+//custom columns for NOTIFICATION
+add_filter('manage_notification_posts_columns' , 'notification_columns');
+function notification_columns($columns){
+  $date_var = $columns['date'];
+  unset($columns['title']);
+	unset($columns['date']);
+
+  //reset values
+	$columns['type'] = __( 'Type' );
+	$columns['message'] = __( 'Message' );
+  $columns['date'] = $date_var;
+
+  return $columns;
+}
+function notification_custom_column_values( $column, $post_id ) {
+  switch ( $column ) {
+    case 'type':
+      echo get_post_meta($post_id, 'type', true );
+      break;
+    case 'message':
+      echo get_post_meta($post_id, 'message', true );
+      break;
+  }
+}
+add_action( 'manage_notification_posts_custom_column' , 'notification_custom_column_values', 10, 2 );
+
 //redirect users to login page if they are not logged in
 add_action( 'template_redirect', 'redirect_users');
 function redirect_users(){
@@ -210,62 +236,17 @@ function generate_lesson_list($params = array()) {
 }
 add_shortcode('get_lessons', 'generate_lesson_list');
 
-//hook into post creation
-// add_action( 'new_to_publish', 'create_lesson_batch', 10, 1 );
-// add_action(  'new_post',  'on_post_scheduled', 10, 2 );
-// function create_lesson_batch( $post ) {
-//   $post_arr = array(
-//     'post_title'   => 'Test post',
-//     'post_content' => 'Test post content',
-//     'post_status'  => 'publish',
-//     'post_author'  => get_current_user_id(),
-//     'meta_input'   => array(
-//       'test_meta_key' => 'value of test_meta_key',
-//     ),
-//   );
-//   wp_insert_post( $post_arr );
-// }
-// function create_lesson_batch($new_status, $old_status=null, $post=null){
-//   if ($new_status == "publish" && $old_status == null){
-//   }
-// }
-// add_action('transition_post_status', 'create_lesson_batch');
-// function create_lesson_batch( $post_id, $post, $update ) {
-//   // $post_arr = array(
-//   //   'post_title'   => 'Test post',
-//   //   'post_content' => 'Test post content',
-//   //   'post_status'  => 'publish',
-//   //   'post_author'  => get_current_user_id(),
-//   //   'meta_input'   => array(
-//   //     'test_meta_key' => 'value of test_meta_key',
-//   //   ),
-//   // );
-//   // wp_insert_post( $post_arr );
-// }
-// add_action( 'new_post', 'create_lesson_batch', 10, 3 );
-// Add the hook action
-// add_action('transition_post_status', 'send_new_post', 10, 3);
-//
-// // Listen for publishing of a new post
-// function send_new_post($new_status, $old_status, $post) {
-//   if('publish' === $new_status && 'publish' !== $old_status) {
-//   }
-// }
-
-// function my_post_new($new_status, $old_status=null, $post=null){
-//     if ($new_status == "auto-draft"){
-//     }
-// }
 // add_action('transition_post_status', 'my_post_new');
 function create_lesson_batch( $ID, $post ) {
   //check if it is a single lesson
   if(get_post_meta($ID, 'is_lesson_batch', true ) == "1"){
-    $to = 'jhill7177@gmail.com';
-    $subject = 'create_lesson_batch';
-    $body = 'Success';
-    $headers = array('Content-Type: text/html; charset=UTF-8');
-
-    wp_mail( $to, $subject, $body, $headers );
+    $post_arr = array(
+      'post_title'   => 'Test post',
+      'meta_input'   => array(
+        'test_meta_key' => 'value of test_meta_key',
+      ),
+    );
+    wp_insert_post( $post_arr );
   }
 }
 add_action('publish_lesson', 'create_lesson_batch', 10, 2 );
