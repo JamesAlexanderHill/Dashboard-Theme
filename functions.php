@@ -226,7 +226,6 @@ add_shortcode('get_lessons', 'generate_lesson_list');
 // }
 // function create_lesson_batch($new_status, $old_status=null, $post=null){
 //   if ($new_status == "publish" && $old_status == null){
-//     ?><script>console.log("RUN!");</script><?php
 //   }
 // }
 // add_action('transition_post_status', 'create_lesson_batch');
