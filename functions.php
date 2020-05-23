@@ -236,19 +236,23 @@ function generate_lesson_list($params = array()) {
 }
 add_shortcode('get_lessons', 'generate_lesson_list');
 
+function notification($type, $msg){
+  $post_arr = array(
+    'meta_input'   => array(
+      'type' => $type,
+      'message' => $msg,
+    ),
+  );
+  wp_insert_post( $post_arr );
+}
+
 // add_action('transition_post_status', 'my_post_new');
 function create_lesson_batch( $ID, $post ) {
+  notification("log", "create_lesson_batch");
   $state = get_post_meta($ID, 'is_lesson_batch', true );
   //check if it is a single lesson
   if($state == "1"){
-    $post_arr = array(
-      'post_title'   => 'Test post',
-      'meta_input'   => array(
-        'type' => 'log',
-        'message' => 'lesson is batch: '.$state,
-      ),
-    );
-    wp_insert_post( $post_arr );
+    notification("log", "State = " . $state);
   }
 }
 add_action('publish_lesson', 'create_lesson_batch', 10, 2 );
