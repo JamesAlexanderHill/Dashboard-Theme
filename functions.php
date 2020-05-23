@@ -209,15 +209,21 @@ function generate_lesson_list($params = array()) {
 }
 add_shortcode('get_lessons', 'generate_lesson_list');
 
-//dynamically fill Forms
-function get_coach_list($value){
-  //get list of users
-  $users = get_users();
-  $choices = array ();
-  foreach ( $users as $user ) {
-      $choices[] = array( 'text' => $user->display_name, 'value' => $user->id );
-  }
-  $field->choices = $choices;
-  return $field;
+//hook into post creation
+add_action( 'new_to_publish', 'on_lesson_creation', 10, 1 );
+function on_lesson_creation( $post ) {
+    if($post->post_type == 'lesson' && get_post_meta($post->id, 'is_lesson_batch', true ) == 1) {
+      $new_post = array(
+        'post_type' => 'lesson',
+        'post_title' => "test",
+        'post_date' => date('Y-m-d H:i:s'),
+        'post_author' => 2,
+        'post_content' => '',
+        'post_status' => 'publish',
+        'comment_status' => 'open',
+        'ping_status' => 'open'
+      );
+
+      $post_id = wp_insert_post( $new_post );
+    }
 }
-add_filter( 'gform_field_value_coach_ids', 'get_coach_list', 10, 3);
