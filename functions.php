@@ -250,7 +250,7 @@ function notification($type, $msg){
 // add_action('transition_post_status', 'my_post_new');
 function create_lesson_batch( $ID, $post ) {
   notification("Log", "create_lesson_batch");
-  $state = get_post_meta($ID, 'is_lesson_batch', true );
+  $state = get_post_meta($post->id, 'is_lesson_batch', true );
   //check if it is a single lesson
   notification("Log", "State = " . $state);
   if($state == 1){
