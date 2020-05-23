@@ -210,16 +210,23 @@ function generate_lesson_list($params = array()) {
 add_shortcode('get_lessons', 'generate_lesson_list');
 
 //hook into post creation
-add_action( 'new_to_publish', 'on_lesson_creation', 10, 1 );
-function on_lesson_creation( $post ) {
-  $post_arr = array(
-    'post_title'   => 'Test post',
-    'post_content' => 'Test post content',
-    'post_status'  => 'publish',
-    'post_author'  => get_current_user_id(),
-    'meta_input'   => array(
-      'test_meta_key' => 'value of test_meta_key',
-    ),
-  );
-  wp_insert_post( $post_arr );
+// add_action( 'new_to_publish', 'create_lesson_batch', 10, 1 );
+// add_action(  'new_post',  'on_post_scheduled', 10, 2 );
+// function create_lesson_batch( $post ) {
+//   $post_arr = array(
+//     'post_title'   => 'Test post',
+//     'post_content' => 'Test post content',
+//     'post_status'  => 'publish',
+//     'post_author'  => get_current_user_id(),
+//     'meta_input'   => array(
+//       'test_meta_key' => 'value of test_meta_key',
+//     ),
+//   );
+//   wp_insert_post( $post_arr );
+// }
+function create_lesson_batch($new_status, $old_status=null, $post=null){
+  if ($new_status == "publish" && $old_status == null){
+    ?><script>console.log("RUN!");</script><?php
+  }
 }
+add_action('transition_post_status', 'create_lesson_batch');
