@@ -238,6 +238,7 @@ add_shortcode('get_lessons', 'generate_lesson_list');
 
 function notification($type, $msg){
   $post_arr = array(
+    'post_type' => 'notification',
     'meta_input'   => array(
       'type' => $type,
       'message' => $msg,
