@@ -105,8 +105,9 @@ function lesson_custom_column_values( $column, $post_id ) {
       $time = date_i18n("g:i A", $unix);
 
       $type = get_post_meta($post_id, 'type', true );
+      $val = get_post_meta($post_id, 'is_lesson_batch', true );
 
-      echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'>" . $type . " | " . $day . " - " . $time . "</a>";
+      echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'>" . $type . " ~" . $val . " | " . $day . " - " . $time . "</a>";
       break;
     case 'coach':
       $coach_id = get_post_meta($post_id, 'coach', true );
