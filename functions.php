@@ -249,7 +249,7 @@ function notification($type, $msg){
 
 // add_action('transition_post_status', 'my_post_new');
 function create_lesson_batch( $ID, $post ) {
-  notification("Log", "create_lesson_batch");
+  notification("Log", "create_lesson_batch: "."(".$ID.", ".$post->id.")");
   $state = get_field("is_lesson_batch", $post->id);
   //check if it is a single lesson
   notification("Log", "State = " . $state);
