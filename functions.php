@@ -212,20 +212,14 @@ add_shortcode('get_lessons', 'generate_lesson_list');
 //hook into post creation
 add_action( 'new_to_publish', 'on_lesson_creation', 10, 1 );
 function on_lesson_creation( $post ) {
-    if($post->post_type == 'lesson') {
-      $post_arr = array(
-          'post_title'   => 'Test post',
-          'post_content' => 'Test post content',
-          'post_status'  => 'publish',
-          'post_author'  => get_current_user_id(),
-          'tax_input'    => array(
-              'hierarchical_tax'     => $hierarchical_tax,
-              'non_hierarchical_tax' => $non_hierarchical_terms,
-          ),
-          'meta_input'   => array(
-              'test_meta_key' => 'value of test_meta_key',
-          ),
-      );
-      wp_insert_post( $post_arr );
-    }
+  $post_arr = array(
+    'post_title'   => 'Test post',
+    'post_content' => 'Test post content',
+    'post_status'  => 'publish',
+    'post_author'  => get_current_user_id(),
+    'meta_input'   => array(
+      'test_meta_key' => 'value of test_meta_key',
+    ),
+  );
+  wp_insert_post( $post_arr );
 }
