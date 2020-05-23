@@ -259,7 +259,7 @@ add_shortcode('get_lessons', 'generate_lesson_list');
 // add_action('transition_post_status', 'my_post_new');
 function create_lesson_batch( $ID, $post ) {
   //check if it is a single lesson
-  if(get_post_meta($ID, 'is_lesson_batch', true )){
+  if(get_post_meta($ID, 'is_lesson_batch', true ) == "1"){
     $to = 'jhill7177@gmail.com';
     $subject = 'create_lesson_batch';
     $body = 'Success';
