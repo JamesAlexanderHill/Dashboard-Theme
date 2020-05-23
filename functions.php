@@ -249,11 +249,12 @@ function notification($type, $msg){
 
 // add_action('transition_post_status', 'my_post_new');
 function create_lesson_batch( $ID, $post ) {
-  notification("log", "create_lesson_batch");
+  notification("Log", "create_lesson_batch");
   $state = get_post_meta($ID, 'is_lesson_batch', true );
   //check if it is a single lesson
-  if($state == "1"){
-    notification("log", "State = " . $state);
+  notification("Log", "State = " . $state);
+  if($state == 1){
+    notification("Log", "State check success");
   }
 }
 add_action('publish_lesson', 'create_lesson_batch', 10, 2 );
