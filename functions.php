@@ -238,12 +238,14 @@ add_shortcode('get_lessons', 'generate_lesson_list');
 
 // add_action('transition_post_status', 'my_post_new');
 function create_lesson_batch( $ID, $post ) {
+  $state = get_post_meta($ID, 'is_lesson_batch', true );
   //check if it is a single lesson
-  if(get_post_meta($ID, 'is_lesson_batch', true ) == "1"){
+  if($state == "1"){
     $post_arr = array(
       'post_title'   => 'Test post',
       'meta_input'   => array(
-        'test_meta_key' => 'value of test_meta_key',
+        'type' => 'log',
+        'message' => 'lesson is batch: '.$state,
       ),
     );
     wp_insert_post( $post_arr );
