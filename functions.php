@@ -242,3 +242,12 @@ add_shortcode('get_lessons', 'generate_lesson_list');
 //   wp_insert_post( $post_arr );
 // }
 // add_action( 'wp_insert_post', 'create_lesson_batch', 10, 3 );
+// Add the hook action
+add_action('transition_post_status', 'send_new_post', 10, 3);
+
+// Listen for publishing of a new post
+function send_new_post($new_status, $old_status, $post) {
+  if('publish' === $new_status && 'publish' !== $old_status && $post->post_type === 'post') {
+    ?><script>console.log("RUN");</script><?php
+  }
+}
