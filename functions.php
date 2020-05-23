@@ -249,6 +249,5 @@ add_action( 'wp_insert_post', 'create_lesson_batch', 10, 3 );
 // // Listen for publishing of a new post
 // function send_new_post($new_status, $old_status, $post) {
 //   if('publish' === $new_status && 'publish' !== $old_status) {
-//     ?><script>console.log("RUN");</script><?php
 //   }
 // }
