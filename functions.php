@@ -229,20 +229,19 @@ add_shortcode('get_lessons', 'generate_lesson_list');
 //   }
 // }
 // add_action('transition_post_status', 'create_lesson_batch');
-function create_lesson_batch( $post_id, $post, $update ) {
-  // $post_arr = array(
-  //   'post_title'   => 'Test post',
-  //   'post_content' => 'Test post content',
-  //   'post_status'  => 'publish',
-  //   'post_author'  => get_current_user_id(),
-  //   'meta_input'   => array(
-  //     'test_meta_key' => 'value of test_meta_key',
-  //   ),
-  // );
-  // wp_insert_post( $post_arr );
-  ?><script>console.log("RUN");</script><?php
-}
-add_action( 'wp_insert_post', 'create_lesson_batch', 10, 3 );
+// function create_lesson_batch( $post_id, $post, $update ) {
+//   // $post_arr = array(
+//   //   'post_title'   => 'Test post',
+//   //   'post_content' => 'Test post content',
+//   //   'post_status'  => 'publish',
+//   //   'post_author'  => get_current_user_id(),
+//   //   'meta_input'   => array(
+//   //     'test_meta_key' => 'value of test_meta_key',
+//   //   ),
+//   // );
+//   // wp_insert_post( $post_arr );
+// }
+// add_action( 'new_post', 'create_lesson_batch', 10, 3 );
 // Add the hook action
 // add_action('transition_post_status', 'send_new_post', 10, 3);
 //
@@ -251,3 +250,14 @@ add_action( 'wp_insert_post', 'create_lesson_batch', 10, 3 );
 //   if('publish' === $new_status && 'publish' !== $old_status) {
 //   }
 // }
+
+// function my_post_new($new_status, $old_status=null, $post=null){
+//     if ($new_status == "auto-draft"){
+//     }
+// }
+// add_action('transition_post_status', 'my_post_new');
+function create_lesson_batch( $ID, $post ) {
+    // A function to perform actions when a post is scheduled to be published.
+    ?><script>console.log("RUN");</script><?php
+}
+add_action(  'publish_lesson',  'create_lesson_batch', 10, 2 );
