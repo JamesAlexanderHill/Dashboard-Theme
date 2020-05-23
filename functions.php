@@ -212,18 +212,16 @@ add_shortcode('get_lessons', 'generate_lesson_list');
 //hook into post creation
 add_action( 'new_to_publish', 'on_lesson_creation', 10, 1 );
 function on_lesson_creation( $post ) {
-    if($post->post_type == 'lesson' && get_post_meta($post->id, 'is_lesson_batch', true ) == 1) {
-      $new_post = array(
-        'post_type' => 'lesson',
-        'post_title' => "test",
-        'post_date' => date('Y-m-d H:i:s'),
-        'post_author' => 2,
-        'post_content' => '',
-        'post_status' => 'publish',
-        'comment_status' => 'open',
-        'ping_status' => 'open'
+    if($post->post_type == 'lesson') {
+      // Create post object
+      $my_post = array(
+        'post_title'    => "tester",
+        'post_content'  => "test content",
+        'post_status'   => 'publish',
+        'post_author'   => 1
       );
 
-      $post_id = wp_insert_post( $new_post );
+      // Insert the post into the database
+      wp_insert_post( $my_post );
     }
 }
