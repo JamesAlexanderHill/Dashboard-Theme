@@ -291,7 +291,8 @@ function create_group( $post_id ) {
       $term = $values['term'];
 
       //get the first Monday of term
-      $term_start = get_post_meta($term, 'starting_date', true );
+      $term_start = get_field('starting_date', $term);
+
       if(date('N', $term_start) <= 1){
       	$start_of_term = strtotime("This Monday", $term_start);
       }else{
