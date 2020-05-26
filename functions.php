@@ -280,7 +280,8 @@ function create_group( $post_id ) {
       $lessonArr = array();
       //create lesson
       $args = array(
-        'post_type' => 'lesson'
+        'post_type' => 'lesson',
+        'post_status' => 'publish'
       );
       $lesson_id = wp_insert_post($args);
       //get values
@@ -302,6 +303,8 @@ function create_group( $post_id ) {
       //set the timestamp
       $timestamp = strtotime("+".$day." day ".$hours." hours ".$mins." minutes", $start_of_term);
 
+      $msg = "init(".$time.", ".$hours.", ".$mins.", ".$day.", ".$term.") -> ". $term_start ."(".date_i18n("d/m/y g:i A", $term_start).") -> ".$start_of_term."(".date_i18n("d/m/y g:i A", $start_of_term).") -> ".$timestamp . "(".date_i18n("d/m/y g:i A", $timestamp).")";
+      notification("Log", $msg);
       //set metadata
       update_field( 'coach', $values['coach'], $lesson_id );
       update_field( 'clients', $values['clients'], $lesson_id );
