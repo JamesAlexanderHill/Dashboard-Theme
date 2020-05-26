@@ -250,6 +250,6 @@ function notification($type, $msg){
 // add_action('transition_post_status', 'my_post_new');
 function create_group( $ID, $post ) {
   $str = $ID . " - " . $post->id;
-  notification("Log", $str)
+  notification("Log", $str);
 }
 add_action('publish_group', 'create_group', 10, 2 );
