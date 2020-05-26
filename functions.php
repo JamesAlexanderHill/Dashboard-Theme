@@ -89,6 +89,7 @@ function lesson_columns($columns){
   //reset values
 	$columns['lesson'] = __( 'Lesson' );
 	$columns['coach'] = __( 'Coach' );
+  $columns['clients'] = __( 'Clients' );
   $columns['location'] = __( 'Location' );
   $columns['hours'] = __( 'Hours' );
   $columns['term'] = __( 'Term' );
@@ -105,13 +106,23 @@ function lesson_custom_column_values( $column, $post_id ) {
 
       $type = get_post_meta($post_id, 'type', true );
 
-      echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'>" . $timestamp . "</a>";
+      echo "<strong><a class='row-title' href='/wp-admin/post.php?post=" . $post_id . "&action=edit'>" . $timestamp . "</a></strong>";
       break;
     case 'coach':
       $coach_id = get_post_meta($post_id, 'coach', true );
       $first_name = get_user_meta( $coach_id, 'first_name', true );
       $last_name = get_user_meta( $coach_id, 'last_name', true );
       echo $first_name . " " . $last_name;
+      break;
+    case 'clients':
+      $str = "";
+      $clients = get_post_meta($post_id, 'clients', true );
+      for($i = 0; i < count($clients); $i++){
+        $name = get_the_title($clients[$i]);
+        $editLink = "https://demo.jameshill.xyz/wp-admin/post.php?post=".$clients[$i]."&action=edit";
+        $str .= "<a href='".$editLink."'>".$name."</a>";
+      }
+      echo $str;
       break;
     case 'location':
       $court_id = get_post_meta($post_id, 'location', true );
@@ -224,7 +235,7 @@ function generate_lesson_list($params = array()) {
       $court = get_the_title($court_id);
       $centre = get_post_meta($court_id, 'location_centre', true );
 
-      $lessonList .= "<tr><td>".$time."</td><td>".$court ." - ". $centre."</td><td>".get_post_meta($post_id, 'length', true )."</td><td><button>Attendance</button></td></tr>";
+      $lessonList .= "<tr><td>".$time."</td><td>".$court."</td><td>".get_post_meta($post_id, 'length', true )."</td><td><button>Attendance</button></td></tr>";
     }
 
     $lessonList .= "</table>";
