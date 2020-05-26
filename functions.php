@@ -115,14 +115,14 @@ function lesson_custom_column_values( $column, $post_id ) {
       echo $first_name . " " . $last_name;
       break;
     case 'clients':
-      $str = "";
+      $str = "test";
       $clients = get_post_meta($post_id, 'clients', true );
-      for($i = 0; i < count($clients); $i++){
-        $name = get_the_title($clients[$i]);
-        $editLink = "https://demo.jameshill.xyz/wp-admin/post.php?post=".$clients[$i]."&action=edit";
-        $str .= "<a href='".$editLink."'>".$name."</a>";
-      }
-      echo $str;
+      // for($i = 0; i < count($clients); $i++){
+      //   $name = get_the_title($clients[$i]);
+      //   $editLink = "https://demo.jameshill.xyz/wp-admin/post.php?post=".$clients[$i]."&action=edit";
+      //   $str .= "<a href='".$editLink."'>".$name."</a>";
+      // }
+      echo $str . " - ".count($clients);
       break;
     case 'location':
       $court_id = get_post_meta($post_id, 'location', true );
