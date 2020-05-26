@@ -101,13 +101,11 @@ function lesson_custom_column_values( $column, $post_id ) {
     case 'lesson':
       $date_time = get_field('timestamp', $post_id);
       $unix = strtotime($date_time);
-      $day = date_i18n("D", $unix);
-      $time = date_i18n("g:i A", $unix);
+      $timestamp = date_i18n("d/m/Y g:i A", $unix);
 
       $type = get_post_meta($post_id, 'type', true );
-      $val = get_post_meta($post_id, 'is_lesson_batch', true );
 
-      echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'>" . $type . " ~" . $val . " | " . $day . " - " . $time . "</a>";
+      echo "<a href='/wp-admin/post.php?post=" . $post_id . "&action=edit'>" . $timestamp . "</a>";
       break;
     case 'coach':
       $coach_id = get_post_meta($post_id, 'coach', true );
@@ -278,9 +276,11 @@ function create_group( $post_id ) {
     if($post->post_status == "publish"){
       $values = get_fields( $post->ID );
       $lessonArr = array();
+      $title = "day - time (term)";
       //create lesson
       $args = array(
         'post_type' => 'lesson',
+        'post_title' => $title,
         'post_status' => 'publish'
       );
       $lesson_id = wp_insert_post($args);
@@ -293,6 +293,8 @@ function create_group( $post_id ) {
 
       //get the first Monday of term
       $term_start = get_field('starting_date', $term);
+
+      //loop through weeks
       $term_start_unix = strtotime($term_start);
 
       if(date_i18n('N', $term_start_unix) <= 1){
