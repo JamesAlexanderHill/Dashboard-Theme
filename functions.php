@@ -294,7 +294,7 @@ function create_group( $post_id ) {
       $term_start = get_field('starting_date', $term);
       $term_start_unix = strtotime($term_start);
 
-      if(date('N', $term_start_unix) <= 1){
+      if(date_i18n('N', $term_start_unix) <= 1){
       	$start_of_term = strtotime("This Monday", $term_start_unix);
       }else{
       	$start_of_term = strtotime("Last Monday", $term_start_unix);
@@ -302,10 +302,11 @@ function create_group( $post_id ) {
 
       //set week
       $week = strtotime("+0 week", $start_of_term);
+      $day = strtotime("+".$day." days", $week);
       //set the timestamp
-      $timestamp = strtotime($time, $week);
+      $timestamp = strtotime($time, $day);
 
-      $msg = "init(".$time.", ".$day.", ".$term.") -> ". $term_start ."(".date_i18n("d/m/Y g:i A", $term_start).") -> ".$start_of_term."(".date_i18n("d/m/Y g:i A", $start_of_term).") -> ".$timestamp . "(".date_i18n("d/m/Y g:i A", $timestamp).")";
+      $msg = "init(".$time.", ".$day.", ".$term.") -> ". $term_start ."(".date_i18n("d/m/Y g:i A", $term_start_unix).") -> ".$start_of_term."(".date_i18n("d/m/Y g:i A", $start_of_term).") -> ".$timestamp . "(".date_i18n("d/m/Y g:i A", $timestamp).")";
       notification("Log", $msg);
       //set metadata
       update_field( 'coach', $values['coach'], $lesson_id );
