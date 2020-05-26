@@ -248,13 +248,8 @@ function notification($type, $msg){
 }
 
 // add_action('transition_post_status', 'my_post_new');
-function create_lesson_batch( $ID, $post ) {
-  notification("Log", "create_lesson_batch: "."(".$ID.", ".$post->id.")");
-  $state = get_field("is_lesson_batch", $ID);
-  //check if it is a single lesson
-  notification("Log", "State = " . $state);
-  if($state){
-    notification("Log", "State check success");
-  }
+function create_group( $ID, $post ) {
+  $str = $ID . " - " . $post->id;
+  notification("Log", $str)
 }
-add_action('publish_lesson', 'create_lesson_batch', 10, 2 );
+add_action('publish_group', 'create_group', 10, 2 );
