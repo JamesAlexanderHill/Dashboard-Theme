@@ -248,9 +248,20 @@ function notification($type, $msg){
 }
 
 // add_action('transition_post_status', 'my_post_new');
-function create_group( $ID, $post ) {
-  $coach = get_field( 'coach', $ID );;
-  notification("Log", $ID);
-  notification("Log", $coach);
+// function create_group( $ID, $post ) {
+//   $coach = get_field( 'coach', $ID );
+//   notification("Log", $ID);
+//   notification("Log", $coach);
+// }
+// add_action('publish_group', 'create_group', 20, 2 );
+
+function fpw_group_info( $id, $post ) {
+    echo '<pre>'; print_r( $post );
+    echo '<br />';
+    $meta = get_post_meta( $post->ID );
+    print_r( $meta );
+    echo '</pre>';
+    die();
+    // your custom code goes here...
 }
-add_action('publish_group', 'create_group', 20, 2 );
+add_action( 'publish_group', 'fpw_group_info', 10, 2 );
