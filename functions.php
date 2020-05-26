@@ -249,9 +249,8 @@ function notification($type, $msg){
 
 // add_action('transition_post_status', 'my_post_new');
 function create_group( $ID, $post ) {
-  $str = $ID;
-  $coach = $_POST['acf']['coach'];
-  notification("Log", $str);
+  $coach = get_field( 'coach', $ID );;
+  notification("Log", $ID);
   notification("Log", $coach);
 }
-add_action('publish_group', 'create_group', 10, 2 );
+add_action('publish_group', 'create_group', 20, 2 );
