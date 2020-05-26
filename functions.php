@@ -272,14 +272,52 @@ function notification($type, $msg){
 // add_action('publish_group', 'create_group', 10, 2 );
 
 
-function my_acf_save_post( $post_id ) {
+function create_group( $post_id ) {
   $post = get_post($post_id);
   if($post->post_type == "group"){
     if($post->post_status == "publish"){
       $values = get_fields( $post->ID );
-      $coach = $values['coach'];
-      notification("Log", $coach);
+      $lessonArr = array();
+      //create lesson
+      $args = array(
+        'post_type' => 'lesson'
+      );
+      $lesson_id = wp_insert_post($args);
+      //get values
+      $time = $values['time'];
+      $hours = date('G', $time);
+      $mins = date('i', $time);
+
+      $day = $values['day'];
+      $term = $values['term'];
+
+      //get the first Monday of term
+      $term_start = get_post_meta($term, 'starting_date', true );
+      if(date('N', $term_start) <= 1){
+      	$start_of_term = strtotime("This Monday", $term_start);
+      }else{
+      	$start_of_term = strtotime("Last Monday", $term_start);
+      }
+
+      //set the timestamp
+      $timestamp = strtotime("+".$day." day ".$hours." hours ".$mins." minutes", $start_of_term);
+
+      //set metadata
+      update_field( 'coach', $values['coach'], $lesson_id );
+      update_field( 'clients', $values['clients'], $lesson_id );
+      update_field( 'location', $values['location'], $lesson_id );
+      update_field( 'timestamp', $timestamp, $lesson_id );
+      update_field( 'length', $values['length'], $lesson_id );
+      update_field( 'type', $values['type'], $lesson_id );
+      update_field( 'term', $term, $lesson_id );
+      update_field( 'group', $post_id, $lesson_id );
+
+      //add id to lesson array
+      array_push($lessonArr, $lesson_id);
+
+      //add array to lessons metadata of the group
+      update_field( 'lessons', $lessonArr, $post_id);
     }
   }
 }
-add_action('acf/save_post', 'my_acf_save_post', 20);
+add_action('acf/save_post', 'create_group', 20);
