@@ -250,7 +250,7 @@ function notification($type, $msg){
 // add_action('transition_post_status', 'my_post_new');
 function create_group( $ID, $post ) {
   $str = $ID;
-  $coach = get_post_meta($ID, 'coach', true );
+  $coach = get_field( "coach", $ID );
   notification("Log", $str);
   notification("Log", $coach);
 }
