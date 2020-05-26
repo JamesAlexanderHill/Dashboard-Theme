@@ -256,12 +256,14 @@ function notification($type, $msg){
 // add_action('publish_group', 'create_group', 20, 2 );
 
 function fpw_group_info( $id, $post ) {
+  if($post->post_status == "publish"){
     echo '<pre>'; print_r( $post );
     echo '<br />';
     $meta = get_post_meta( $post->ID );
     print_r( $meta );
     echo '</pre>';
     die();
+  }
     // your custom code goes here...
 }
 add_action( 'save_post_group', 'fpw_group_info', 10, 2 );
