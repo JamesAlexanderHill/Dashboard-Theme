@@ -264,4 +264,4 @@ function fpw_group_info( $id, $post ) {
     die();
     // your custom code goes here...
 }
-add_action( 'publish_group', 'fpw_group_info', 10, 2 );
+add_action( 'save_post_group', 'fpw_group_info', 10, 2 );
