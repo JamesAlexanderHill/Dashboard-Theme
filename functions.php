@@ -287,7 +287,8 @@ function create_group( $post_id ) {
       //get values
       $time = $values['time'];
 
-      $day = $values['day'];
+      $days = $values['day'];
+      $weeks = 0;
       $term = $values['term'];
 
       //get the first Monday of term
@@ -301,8 +302,8 @@ function create_group( $post_id ) {
       }
 
       //set week
-      $week = strtotime("+0 week", $start_of_term);
-      $day = strtotime("+".$day." days", $week);
+      $week = strtotime("+".$weeks." week", $start_of_term);
+      $day = strtotime("+".$days." days", $week);
       //set the timestamp
       $timestamp = strtotime($time, $day);
 
