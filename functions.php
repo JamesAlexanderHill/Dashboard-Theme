@@ -255,7 +255,7 @@ function notification($type, $msg){
 // }
 // add_action('publish_group', 'create_group', 20, 2 );
 
-function fpw_group_info( $id, $post ) {
+function create_group( $id, $post ) {
   if($post->post_status == "publish"){
     echo '<pre>'; print_r( $post );
     echo '<br />';
@@ -269,4 +269,22 @@ function fpw_group_info( $id, $post ) {
   }
     // your custom code goes here...
 }
-add_action( 'save_post_group', 'fpw_group_info', 10, 2 );
+add_action('publish_group', 'create_group', 10, 2 );
+
+
+function my_acf_save_post( $post_id ) {
+  if($post->post_type == "group"){
+    if($post->post_status == "publish"){
+      echo '<pre>'; print_r( $post );
+      echo '<br />';
+      $meta = get_post_meta( $post->ID );
+      print_r( $meta );
+      echo '<br />';
+      $values = get_fields( $post->ID );
+      print_r( $values );
+      echo '</pre>';
+      die();
+    }
+  }
+}
+add_action('acf/save_post', 'my_acf_save_post', 20);
