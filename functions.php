@@ -276,15 +276,9 @@ function my_acf_save_post( $post_id ) {
   $post = get_post($post_id);
   if($post->post_type == "group"){
     if($post->post_status == "publish"){
-      echo '<pre>'; print_r( $post );
-      echo '<br />';
-      $meta = get_post_meta( $post->ID );
-      print_r( $meta );
-      echo '<br />';
       $values = get_fields( $post->ID );
-      print_r( $values );
-      echo '</pre>';
-      die();
+      $coach = $values['coach'];
+      notification("Log", $coach);
     }
   }
 }
