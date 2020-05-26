@@ -303,7 +303,7 @@ function create_group( $post_id ) {
       //set the timestamp
       $timestamp = strtotime($time, $week);
 
-      $msg = "init(".$time.", ".$day.", ".$term.") -> ". $term_start ."(".date_i18n("d/m/y g:i A", $term_start).") -> ".$start_of_term."(".date_i18n("d/m/y g:i A", $start_of_term).") -> ".$timestamp . "(".date_i18n("d/m/y g:i A", $timestamp).")";
+      $msg = "init(".$time.", ".$day.", ".$term.") -> ". $term_start ."(".date_i18n("d/m/Y g:i A", $term_start).") -> ".$start_of_term."(".date_i18n("d/m/Y g:i A", $start_of_term).") -> ".$timestamp . "(".date_i18n("d/m/Y g:i A", $timestamp).")";
       notification("Log", $msg);
       //set metadata
       update_field( 'coach', $values['coach'], $lesson_id );
