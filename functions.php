@@ -255,21 +255,21 @@ function notification($type, $msg){
 // }
 // add_action('publish_group', 'create_group', 20, 2 );
 
-function create_group( $id, $post ) {
-  if($post->post_status == "publish"){
-    echo '<pre>'; print_r( $post );
-    echo '<br />';
-    $meta = get_post_meta( $post->ID );
-    $values = get_fields( $post->ID );
-    print_r( $meta );
-    echo '<br />';
-    print_r( $values );
-    echo '</pre>';
-    die();
-  }
-    // your custom code goes here...
-}
-add_action('publish_group', 'create_group', 10, 2 );
+// function create_group( $id, $post ) {
+//   if($post->post_status == "publish"){
+//     echo '<pre>'; print_r( $post );
+//     echo '<br />';
+//     $meta = get_post_meta( $post->ID );
+//     $values = get_fields( $post->ID );
+//     print_r( $meta );
+//     echo '<br />';
+//     print_r( $values );
+//     echo '</pre>';
+//     die();
+//   }
+//     // your custom code goes here...
+// }
+// add_action('publish_group', 'create_group', 10, 2 );
 
 
 function my_acf_save_post( $post_id ) {
