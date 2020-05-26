@@ -260,7 +260,10 @@ function fpw_group_info( $id, $post ) {
     echo '<pre>'; print_r( $post );
     echo '<br />';
     $meta = get_post_meta( $post->ID );
+    $values = get_fields( $post->ID );
     print_r( $meta );
+    echo '<br />';
+    print_r( $values );
     echo '</pre>';
     die();
   }
