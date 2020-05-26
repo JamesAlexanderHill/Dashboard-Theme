@@ -292,11 +292,12 @@ function create_group( $post_id ) {
 
       //get the first Monday of term
       $term_start = get_field('starting_date', $term);
+      $term_start_unix = strtotime($term_start);
 
-      if(date('N', $term_start) <= 1){
-      	$start_of_term = strtotime("This Monday", $term_start);
+      if(date('N', $term_start_unix) <= 1){
+      	$start_of_term = strtotime("This Monday", $term_start_unix);
       }else{
-      	$start_of_term = strtotime("Last Monday", $term_start);
+      	$start_of_term = strtotime("Last Monday", $term_start_unix);
       }
 
       //set week
