@@ -249,7 +249,9 @@ function notification($type, $msg){
 
 // add_action('transition_post_status', 'my_post_new');
 function create_group( $ID, $post ) {
-  $str = $ID . " - " . $post->id;
+  $str = $ID;
+  $coach = get_post_meta($ID, 'coach', true );
   notification("Log", $str);
+  notification("Log", $coach);
 }
 add_action('publish_group', 'create_group', 10, 2 );
