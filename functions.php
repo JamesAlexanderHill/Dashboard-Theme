@@ -273,6 +273,7 @@ function notification($type, $msg){
 
 
 function my_acf_save_post( $post_id ) {
+  $post = get_post($post_id);
   if($post->post_type == "group"){
     if($post->post_status == "publish"){
       echo '<pre>'; print_r( $post );
