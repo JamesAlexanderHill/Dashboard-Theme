@@ -285,7 +285,8 @@ function create_group( $post_id ) {
       );
       $lesson_id = wp_insert_post($args);
       //get values
-      $time = $values['time'];
+      //$time = $values['time'];
+      $time = get_post_meta($post_id, 'time', true );
       $hours = date('G', $time);
       $mins = date('i', $time);
 
