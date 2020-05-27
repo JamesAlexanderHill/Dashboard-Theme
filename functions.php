@@ -287,7 +287,14 @@ function create_group( $post_id ) {
     if($post->post_status == "publish"){
       $values = get_fields( $post->ID );
       $lessonArr = array();
-      $title = "day - time (term)";
+
+      //get values
+      $time = $values['time'];
+      $days = $values['day'];
+      $weeks = 0;
+      $term = $values['term'];
+
+      $title = $days." - ".$time." (".$term.")";
       //create lesson
       $args = array(
         'post_type' => 'lesson',
@@ -295,12 +302,7 @@ function create_group( $post_id ) {
         'post_status' => 'publish'
       );
       $lesson_id = wp_insert_post($args);
-      //get values
-      $time = $values['time'];
 
-      $days = $values['day'];
-      $weeks = 0;
-      $term = $values['term'];
 
       //get the first Monday of term
       $term_start = get_field('starting_date', $term);
