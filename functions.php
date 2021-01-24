@@ -165,6 +165,32 @@ function notification_custom_column_values( $column, $post_id ) {
 }
 add_action( 'manage_notification_posts_custom_column' , 'notification_custom_column_values', 10, 2 );
 
+//custom columns for GROUP
+add_filter('manage_group_posts_columns' , 'group_columns');
+function group_columns($columns){
+  $date_var = $columns['date']; 
+  unset($columns['title']);
+	unset($columns['date']);
+
+  //reset values
+	$columns['type'] = __( 'Type' );
+	$columns['message'] = __( 'Message' );
+  $columns['date'] = $date_var;
+
+  return $columns;
+}
+function group_custom_column_values( $column, $post_id ) {
+  switch ( $column ) {
+    case 'type':
+      echo get_post_meta($post_id, 'type', true );
+      break;
+    case 'message':
+      echo get_post_meta($post_id, 'message', true );
+      break;
+  }
+}
+add_action( 'manage_group_posts_custom_column' , 'group_custom_column_values', 10, 2 );
+
 //redirect users to login page if they are not logged in
 add_action( 'template_redirect', 'redirect_users');
 function redirect_users(){
